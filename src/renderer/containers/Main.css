@@ -1,0 +1,32 @@
+.maincontainer {
+  position: relative;
+  top: 67px;
+  height: 100vh;
+  background-color: #333;
+  width: 100vw;
+  padding-top: 30px;
+}
+.maincontent {
+  padding-left: 65px;
+}
+.dashbanner {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 50px;
+}
+.MuiPaper-root.info {
+  background-color: #7373ba;
+  color: white;
+}
+.MuiPaper-root.critical {
+  background-color: #931717;
+  color: white;
+}
+.MuiPaper-root.moderate {
+  background-color: #87876e;
+  color: white;
+}
+.MuiPaper-root.secure {
+  background-color: #247424;
+  color: white;
+}
