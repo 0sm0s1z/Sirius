@@ -219,3 +219,35 @@
   left: 35vw;
   z-index: 2015;
 }
+.dashbox {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 50px;
+}
+.right {
+  float: right;
+  padding-right: 20px;
+}
+.MuiBadge-standard {
+  background-color: red;
+  color: red;
+}
+.bottom {
+  position: absolute;
+  bottom: 0;
+  color: 'red';
+}
+.navtoolbar {
+  vh: 100;
+}
+.leftcard {
+  padding-left: 10px;
+  padding-right: 0px;
+  padding-bottom: 10px;
+  z-index: 100;
+}
+.rightcard {
+  padding-left: 0px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}

@@ -8,6 +8,7 @@ import ReactTooltip from 'react-tooltip';
 
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
+import Tabs from '@mui/material/Tabs';
 
 
 import './Home.css';
@@ -16,7 +17,7 @@ import logo from '/assets/logo.png';
 
 
 class MenuBar extends React.Component {
-  //props: Props;
+  props: Props;
 
   constructor(props) {
     super(props);
@@ -37,14 +38,20 @@ class MenuBar extends React.Component {
           <div className="logoitem">
             <img className="logo" src={logo} />
           </div>
-          <div className="menuitem">
-            <FontAwesomeIcon icon={faDragon} />
+          <div className="menuitem" onClick={this.props.toggleDashView}>
+            Dashboard
+          </div>
+          <div className="menuitem" onClick={this.props.toggleHostsView}>
+            Hosts
           </div>
           <div className="menuitem">
-            <FontAwesomeIcon data-tip="Table View" onClick={this.props.toggleTableView} icon={faTable} />
+            Vulnerabilities
+          </div>
+          <div className="menuitem" onClick={this.props.toggleAgentsView}>
+            Agents
           </div>
           <div className="menuitem">
-            <FontAwesomeIcon data-tip="Console View" onClick={this.props.toggleTableView} icon={faTerminal} />
+            Scans
           </div>
         </div>
 

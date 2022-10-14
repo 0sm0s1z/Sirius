@@ -1,0 +1,71 @@
+.terminalprompt {
+  position: fixed;
+  bottom: -10px;
+  left: 65px;
+  background-color: black;
+  padding: 15px;
+  min-height: 15px;
+  color: yellow;
+  width: 100vw;
+  font-family: monospace;
+  font-size: 22px;
+}
+.terminaldressing {
+  position: fixed;
+  bottom: 59px;
+  left: 65px;
+  padding-bottom: 2px;
+  margin-bottom: 3px;
+  background-color: #0080ff;
+  border-top: 1px solid white;
+  color: #fff;
+  width: 100vw;
+  font-family: monospace;
+}
+.terminalprompt input {
+  color: white;
+  font-family: monospace;
+  font-size: 22px;
+}
+.terminalcanvas {
+  position: fixed;
+  color: white;
+  height: 800px;
+  bottom: 80px;
+  left: 85px;
+  font-family: monospace;
+  font-size: 22px;
+  overflow: scroll;
+}
+.terminalbg {
+  position: relative;
+  left: 50px;
+  bottom: 160px;
+  background-color: rgb(35 33 33);
+  opacity: .4;
+  z-index: -1;
+}
+.commandoutput {
+  font-size: 16px;
+}
+.terminalcontainer {
+  position: relative;
+  min-width: 100vw;
+  height: 100vh;
+  background-color: rgb(21 21 21);
+}
+.terminalbody {
+  position: absolute;
+  left: 65px;
+  min-height: 100vh;
+}
+.terminalblock{
+  position: relative;
+  min-width: 80vw;
+  z-index: 10;
+}
+.terminalheader {
+  position: absolute;
+  top: 90px;
+  z-index: 100;
+}

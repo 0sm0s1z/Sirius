@@ -69,7 +69,7 @@ class VulnOverTime extends React.Component {
 
     return (
       <AreaChart
-        width={950}
+        width={850}
         height={400}
         data={data}
         margin={{

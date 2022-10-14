@@ -25,6 +25,8 @@ import logo from '/assets/logo.png';
 import DashCards from '../components/DashCards.js';
 import VulnPieGraph from '../components/VulnPieGraph.js';
 import TopVulns from '../components/TopVulns.js';
+import TopRemediations from '../components/TopRemediations.js';
+import VulnsBySeverity from '../components/VulnsBySeverity.js';
 import VulnOverTime from '../components/VulnOverTime.js';
 
 
@@ -69,10 +71,10 @@ class Dashboard extends React.Component {
               <TopVulns />
             </Grid>
             <Grid item xs={4}>
-              <VulnPieGraph />
+              <TopRemediations />
             </Grid>
             <Grid item xs={4}>
-              <VulnPieGraph />
+              <VulnsBySeverity />
             </Grid>
           </Grid>
         </div>

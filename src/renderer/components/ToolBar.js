@@ -18,14 +18,21 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
+
 import ListItemIcon from '@mui/material/ListItemIcon';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import BugReport from '@mui/icons-material/BugReport';
+import Policy from '@mui/icons-material/Policy';
+import Token from '@mui/icons-material/Token';
+import Security from '@mui/icons-material/Security';
+import Settings from '@mui/icons-material/Settings';
+import Logout from '@mui/icons-material/Logout';
+import PrivacyTip from '@mui/icons-material/PrivacyTip';
+import ViewList from '@mui/icons-material/ViewList';
 
 
 import './Home.css';
 import logo from '/assets/logo.png';
-
 
 
 class ToolBar extends React.Component {
@@ -42,13 +49,13 @@ class ToolBar extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="navtoolbar">
         <Drawer className="toolbar"
           sx={{
             flexShrink: 0,
             color: 'white',
             '& .MuiDrawer-paper': {
-              width: "70px",
+              width: "65px",
               boxSizing: 'border-box',
               backgroundColor: '#222',
             },
@@ -59,24 +66,52 @@ class ToolBar extends React.Component {
           <Toolbar />
           <Divider />
           <List >
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon sx={{color:'white'}}>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-              </ListItem>
-            ))}
+            <ListItem button>
+              <ListItemIcon>
+                <ViewList sx={{color:'white', fontSize: 32}} />
+              </ListItemIcon>
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <BugReport sx={{color:'white', fontSize: 32}} />
+              </ListItemIcon>
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <Token sx={{color:'white', fontSize: 32}} />
+              </ListItemIcon>
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <Security sx={{color:'white', fontSize: 32}} />
+              </ListItemIcon>
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon sx={{color:'white'}}>
+                <Policy sx={{color:'white', fontSize: 32}} />
+              </ListItemIcon>
+            </ListItem>
           </List>
           <Divider />
-          <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-              <ListItem button key={text}>
+          <div className="bottom">
+            <List >
+              <ListItem button>
                 <ListItemIcon sx={{color:'white'}}>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  <PrivacyTip sx={{color:'white', fontSize: 32}} />
                 </ListItemIcon>
               </ListItem>
-            ))}
-          </List>
+              <ListItem button>
+                <ListItemIcon sx={{color:'white'}}>
+                  <Settings sx={{color:'white', fontSize: 32}} />
+                </ListItemIcon>
+              </ListItem>
+              <ListItem button>
+                <ListItemIcon sx={{color:'white'}}>
+                  <Logout sx={{color:'white', fontSize: 32}} />
+                </ListItemIcon>
+              </ListItem>
+            </List>
+          </div>
         </Drawer>
       </div>
     );
