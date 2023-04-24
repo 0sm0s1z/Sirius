@@ -54,11 +54,11 @@ class HostOverview extends React.Component {
                   <hr></hr>
                 </Typography>
                 <Typography sx={{ paddingLeft: '12px' }} variant="h7" component="div">
-                  HOST: WS2k8-SQLSVR
+                  HOST: SANS-SEC460
                   <hr></hr>
                 </Typography>
                 <Typography sx={{ paddingLeft: '12px' }} variant="h7" component="div">
-                  OS: Windows Server 2008R2
+                  OS: Windows 10
                   <hr></hr>
                 </Typography>
               </Grid>

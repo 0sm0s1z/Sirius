@@ -1,9 +1,23 @@
+/* eslint-disable react/jsx-filename-extension */
 // @flow
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faWallet, faIndustry, faTerminal, faScroll, faBars, faBug, faKey, faServer, faRadiation, faHeadphones, faTable, faDragon } from '@fortawesome/free-solid-svg-icons';
+import {
+  faWallet,
+  faIndustry,
+  faTerminal,
+  faScroll,
+  faBars,
+  faBug,
+  faKey,
+  faServer,
+  faRadiation,
+  faHeadphones,
+  faTable,
+  faDragon,
+} from '@fortawesome/free-solid-svg-icons';
 import ReactTooltip from 'react-tooltip';
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
 
@@ -26,7 +40,7 @@ import DashCards from '../components/DashCards.js';
 import VulnPieGraph from '../components/VulnPieGraph.js';
 import VulnFilter from '../components/VulnFilter.js';
 
-//Host Compoments
+// Host Compoments
 import HostOverview from '../components/host/HostOverview.js';
 import HostManager from '../components/host/HostManager.js';
 import HostServices from '../components/host/HostServices.js';
@@ -34,9 +48,10 @@ import HostSoftware from '../components/host/HostSoftware.js';
 import NewHost from '../components/host/NewHost.tsx';
 import VulnList from '../components/host/VulnList.tsx';
 
+// Host Actions
+import { handleVulnList } from '../components/host/actions/handleVulnList.js';
 
-import { getHosts, getVulnerabilityList } from '../actions/api/db.js'
-
+import { getHosts, getVulnerabilityList } from '../actions/api/db.js';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -47,12 +62,10 @@ const Item = styled(Paper)(({ theme }) => ({
   lineHeight: '60px',
 }));
 
-const test = [
-  {"data": "test"}
-];
+const test = [{ data: 'test' }];
 
 class Hosts extends React.Component {
-  //props: Props;
+  // props: Props;
 
   constructor(props) {
     super(props);
@@ -61,60 +74,118 @@ class Hosts extends React.Component {
       open: false,
       newhost: false,
       vulnerabilityview: false,
-      selectedHost: "",
-      hostList: [{
-        "ip": ""
-      }],
-      vulnerabilityList: [{
-        "cve": "CVE-2017-0145 - Remote Code Execution",
-        "catagory": "RCE",
-        "tags": "CISA Worm RCE Wild",
-        "cvss": 9.8,
-        "srs": 10,
-        "description": 'The SMBv1 server in Microsoft Windows Vista SP2; Windows Server 2008 SP2 and R2 SP1; Windows 7 SP1; Windows 8.1; Windows Server 2012 Gold and R2; Windows RT 8.1; and Windows 10 Gold, 1511, and 1607; and Windows Server 2016 allows remote attackers to execute arbitrary code via crafted packets, aka "Windows SMB Remote Code Execution Vulnerability." This vulnerability is different from those described in CVE-2017-0143, CVE-2017-0144, CVE-2017-0146, and CVE-2017-0148.',
-        "cia": "3,3,3"
-      }],
+      selectedHost: '',
+      hostList: [
+        {
+          ip: '127.0.0.1',
+        },
+      ],
+      vulnerabilityList: [
+        {
+          CVEDataMeta: {
+            ID: 'Loading Vulnerability List...',
+            ASSIGNER: 'cve@mitre.org',
+          },
+          CVSSV3: {
+            baseScore: 0,
+            baseSeverity: '',
+          },
+          Description: {
+            description_data: [
+              {
+                value: 'Loading...',
+              },
+            ],
+          },
+          References: ['Loading...'],
+          cve: 'CVE-2017-0145 - Remote Code Execution',
+          catagory: '',
+          tags: 'CISA Worm RCE Wild',
+          cvss: 9.8,
+          srs: 10,
+          description:
+            'The SMBv1 server in Microsoft Windows Vista SP2; Windows Server 2008 SP2 and R2 SP1; Windows 7 SP1; Windows 8.1; Windows Server 2012 Gold and R2; Windows RT 8.1; and Windows 10 Gold, 1511, and 1607; and Windows Server 2016 allows remote attackers to execute arbitrary code via crafted packets, aka "Windows SMB Remote Code Execution Vulnerability." This vulnerability is different from those described in CVE-2017-0143, CVE-2017-0144, CVE-2017-0146, and CVE-2017-0148.',
+          cia: '3,3,3',
+        },
+      ],
+      baseVulnerabilityList: [
+        {
+          CVEDataMeta: {
+            ID: 'Loading Vulnerability List...',
+            ASSIGNER: 'cve@mitre.org',
+          },
+          CVSSV3: {
+            baseScore: 0,
+            baseSeverity: '',
+          },
+          Description: {
+            description_data: [
+              {
+                value: 'Loading...',
+              },
+            ],
+          },
+          References: ['Loading...'],
+          cve: 'CVE-2017-0145 - Remote Code Execution',
+          catagory: '',
+          tags: 'CISA Worm RCE Wild',
+          cvss: 9.8,
+          srs: 10,
+          description:
+            'The SMBv1 server in Microsoft Windows Vista SP2; Windows Server 2008 SP2 and R2 SP1; Windows 7 SP1; Windows 8.1; Windows Server 2012 Gold and R2; Windows RT 8.1; and Windows 10 Gold, 1511, and 1607; and Windows Server 2016 allows remote attackers to execute arbitrary code via crafted packets, aka "Windows SMB Remote Code Execution Vulnerability." This vulnerability is different from those described in CVE-2017-0143, CVE-2017-0144, CVE-2017-0146, and CVE-2017-0148.',
+          cia: '3,3,3',
+        },
+      ],
     };
-    this.toggleNewHost = this.toggleNewHost.bind(this)
-    this.setSelectedHost = this.setSelectedHost.bind(this)
-    this.disableViews = this.disableViews.bind(this)
+    this.toggleNewHost = this.toggleNewHost.bind(this);
+    this.setSelectedHost = this.setSelectedHost.bind(this);
+    this.disableViews = this.disableViews.bind(this);
   }
 
   componentDidMount() {
-    getHosts()
-      .then(hosts => {
-        console.log(hosts)
-        this.setState({ hostList: hosts })
+    getHosts().then((hosts) => {
+      console.log(hosts);
+      if (hosts) {
+        this.setState({ hostList: hosts });
+      }
+    });
+    setInterval(() => {
+      const svdbhost = {
+        ip: this.state.selectedHost,
+      };
+      getVulnerabilityList(svdbhost).then((data) => {
+        console.log(data);
+        if (data) {
+          this.setState({ vulnerabilityList: data });
+        } else {
+          const emptyList = this.state.baseVulnerabilityList;
+          emptyList[0].CVEDataMeta.ID = 'No Vulnerabilities Found'
+          this.setState({ vulnerabilityList: emptyList });
+        }
       });
-      setInterval(() => {
-        getVulnerabilityList("{'CVE': ['CVE-2022-29457', 'CVE-2022-29458']}")
-          .then(data => {
-            console.log(data)
-            this.setState({ vulnerabilityListed: data })
-          });
-      }, 10000);
-      //.then(data => this.setState({ data }));
+    }, 5000);
+    // .then(data => this.setState({ data }));
   }
   disableViews() {
     this.setState({
       vulnerabilityview: false,
-      newhost: false
+      newhost: false,
     });
   }
 
   toggleNewHost() {
-    this.disableViews()
+    this.disableViews();
     this.setState({ newhost: true });
   }
 
-  //Trigger fetchHosts... or such
+  // Trigger fetchHosts... or such
   setSelectedHost = (ip) => {
-    this.disableViews()
+    this.disableViews();
     this.setState({
       vulnerabilityview: true,
-      selectedHost: ip
+      selectedHost: ip,
     });
-  }
+  };
 
   render() {
     return (
@@ -122,26 +193,30 @@ class Hosts extends React.Component {
         <div className="maincontent">
           <Grid container spacing={2}>
             <Grid item xs={4}>
-              <HostManager toggleNewHost={this.toggleNewHost} setSelectedHost={this.setSelectedHost} hostList={this.state.hostList} />
-              { this.state.vulnerabilityview ?
+              <HostManager
+                toggleNewHost={this.toggleNewHost}
+                setSelectedHost={this.setSelectedHost}
+                hostList={this.state.hostList}
+              />
+              {this.state.vulnerabilityview ? (
                 <div>
                   <HostOverview hostDetails={this.state.selectedHost} />
                   <HostServices />
                   <HostSoftware />
                 </div>
-              : null }
+              ) : null}
             </Grid>
             <Grid item xs={8}>
-              { this.state.vulnerabilityview ?
+              {this.state.vulnerabilityview ? (
                 <div>
                   <VulnFilter />
                   <VulnList vulnerabilityList={this.state.vulnerabilityList} />
                 </div>
-              : null }
+              ) : null}
 
-              { this.state.newhost ?
+              {this.state.newhost ? (
                 <NewHost disableViews={this.disableViews} />
-              : null }
+              ) : null}
             </Grid>
           </Grid>
         </div>

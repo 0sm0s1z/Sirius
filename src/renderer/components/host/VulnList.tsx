@@ -26,10 +26,7 @@ import UploadFileRoundedIcon from '@mui/icons-material/UploadFileRounded';
 
 import { createMuiTheme } from 'material-ui/styles';
 
-
 import '../Home.css';
-
-
 
 function createData(
   cve: string,
@@ -37,7 +34,7 @@ function createData(
   tags: string,
   cvss: int,
   srs: int,
-  description: string,
+  description: string
 ) {
   return {
     cve,
@@ -49,24 +46,50 @@ function createData(
   };
 }
 
-
-const imp17 = "3,3,3"
+const imp17 = '3,3,3';
 
 const rows = [
-  createData('CVE-2017-0145 - Remote Code Execution', 'RCE', 'CISA Worm RCE Wild', 9.8, 10, "this.props.vulnerabilityList[0].description", imp17),
-  createData('CVE-2021-38647 - Microsoft Azure Open Management Infrastructure (OMI) Remote Code Execution Vulnerability', 237, 9.0, 37, 4.3, 4.99),
-  createData('CVE-2020-8196 - Application Delivery Controller (ADC), Gateway, and SDWAN WANOP', 262, 16.0, 24, 6.0, 3.79),
-  createData('CVE-2021-34473 - Microsoft Exchange Server Remote Code Execution Vulnerability', 305, 3.7, 67, 4.3, 2.5),
+  createData(
+    'CVE-2017-0145 - Remote Code Execution',
+    'RCE',
+    'CISA Worm RCE Wild',
+    9.8,
+    10,
+    'this.props.vulnerabilityList[0].description',
+    imp17
+  ),
+  createData(
+    'CVE-2021-38647 - Microsoft Azure Open Management Infrastructure (OMI) Remote Code Execution Vulnerability',
+    237,
+    9.0,
+    37,
+    4.3,
+    4.99
+  ),
+  createData(
+    'CVE-2020-8196 - Application Delivery Controller (ADC), Gateway, and SDWAN WANOP',
+    262,
+    16.0,
+    24,
+    6.0,
+    3.79
+  ),
+  createData(
+    'CVE-2021-34473 - Microsoft Exchange Server Remote Code Execution Vulnerability',
+    305,
+    3.7,
+    67,
+    4.3,
+    2.5
+  ),
 ];
-
-
 
 function Row(props: { row: ReturnType<typeof createData> }) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
 
   return (
-    <React.Fragment>
+    <>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
         <TableCell>
           <IconButton
@@ -78,12 +101,11 @@ function Row(props: { row: ReturnType<typeof createData> }) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {row.cve}
+          {row.CVEDataMeta.ID}
         </TableCell>
-        <TableCell align="right">{row.catagory}</TableCell>
-        <TableCell align="right">{row.tags}</TableCell>
-        <TableCell align="right">{row.cvss}</TableCell>
-        <TableCell align="right">{row.srs}</TableCell>
+        <TableCell align="right">{row.CVSSV3.baseSeverity}</TableCell>
+        <TableCell align="right">{row.Tags}</TableCell>
+        <TableCell align="right">{row.CVSSV3.baseScore}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -93,7 +115,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                 Vulnerablity Summary
               </Typography>
               <Typography variant="subtitle1" gutterBottom component="div">
-                {row.description}
+                {row.Description.description_data[0].value}
               </Typography>
               <Typography variant="h6" gutterBottom component="div">
                 Impact
@@ -116,30 +138,32 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                   </TableBody>
                 </Table>
               </Typography>
+              <Typography variant="h6" gutterBottom component="div">
+                References
+              </Typography>
+              <Typography variant="subtitle1" gutterBottom component="div">
+                {row.References[0]}
+              </Typography>
             </Box>
           </Collapse>
         </TableCell>
       </TableRow>
-    </React.Fragment>
+    </>
   );
 }
-
 
 class VulnList extends React.Component {
   //props: Props;
 
   constructor(props) {
     super(props);
-    this.props.vulnerabilityList.map((row) => (
-      console.log("test")
-    ))
+    this.props.vulnerabilityList.map((row) => console.log(row.CVEDataMeta.ID));
 
     this.state = {
       open: false,
-      setOpen: false
+      setOpen: false,
     };
   }
-
 
   render() {
     return (
@@ -150,15 +174,14 @@ class VulnList extends React.Component {
               <TableRow>
                 <TableCell />
                 <TableCell>Vulnerability</TableCell>
-                <TableCell align="right">Catagory</TableCell>
+                <TableCell align="right">Severity</TableCell>
                 <TableCell align="right">Tags</TableCell>
                 <TableCell align="right">CVSS</TableCell>
-                <TableCell align="right">Risk (SRS)</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {this.props.vulnerabilityList.map((row) => (
-                <Row key={row.name} row={row} />
+                <Row key={row} row={row} />
               ))}
             </TableBody>
           </Table>

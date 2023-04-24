@@ -30,7 +30,7 @@ class HostSearch extends React.Component {
     this.state = {
       open: false,
       hostList: [{
-        "ip": ""
+        "ip": "1"
         }],
     };
     //this.fetchHosts = this.fetchHosts.bind(this);
